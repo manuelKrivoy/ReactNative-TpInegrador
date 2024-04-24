@@ -1,0 +1,21 @@
+Objetivo del TP
+
+Crear una APP Mobile en React Native, puede ser JS o TS, basada en EXPO, que permita cronometrizar tareas, e informar a otros usuarios de dichas ejecuciones. Las tareas cronometrizadas deberán poder almacenarse en un storage externo al dispositivo, a fin de poder ser recuperadas desde cualquier otro dispositivo que el usuario final desee, y en el dispositvo interno a fin de evitar el uso de la red para evitar degradaciones de performance.
+
+La aplicación deberá contar con una pantalla de Login (y opcionalmente un Registro de usuario) utilizando Firebase como sistema de autenticación.
+
+El storage externo que deberán utilizar puede ser Firebase, en caso de querer utilizar otro indicar y justificar.
+
+La app deberá permitir visualizar tareas generadas por otros usuarios (de confianza) en otros dispositivos, y registrar mediante el uso del GPS del dispositivo la goelicalización de dicha tareas junto con su tiempo de ejecución y lapsos.
+
+Cronograma de entregas
+
+Primer entregable (30/4) Mostrar un cronometro por pantalla, que tenga la siguiente funcionalidad: Inicio, Pausa, Resumir la pausa, Lapso y Reiniciar.
+
+Segundo entregable (7/5) Almacenar diferentes corridas del cronómetro en el storage interno del dispositivo.
+
+Tercer entregable (21/5) habilitar Geolocalización para registrar ubicación de las diferentes ejecuciones del cronómetro
+
+Cuarto entregable (4/6) Intergrar Login y Almacenamiento externo
+
+Quinto (y último) entregable (11/6) Recibir una notificación directa de un "contacto externo (y de confianza)" cuando este inicie y finalice su cronometro mediante el uso de Websockets con el objetivo que dicha comunicación no pase a través de servidores intermedios (conexión directa entre dispositivos)
