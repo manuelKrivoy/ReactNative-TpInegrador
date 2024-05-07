@@ -4,17 +4,22 @@ import { StyleSheet, Text, View } from "react-native";
 
 //React-Icons para iconos
 import { IoPlay } from "react-icons/io5";
-import { FaPause, FaFlag, FaSquare } from "react-icons/fa";
+import { FaPause, FaFlag, FaSquare, FaAlignJustify, FaRegTrashAlt } from "react-icons/fa";
 
 //Componentes propios
 import LapseContainer from "../common/LapseContainer";
 import ClockButton from "../common/ClockButton";
+
+// Utilidades
+import { guardarTiempo, obtenerTiempos, eliminarTiempos } from '../utils/Storage'; //
+
 
 const Clock = () => {
   const [reloj, setReloj] = useState(0.0); //Cronometra
   const [isPaused, setIsPaused] = useState(true); //Guarda estado boton pausa
   const [isStarted, setIsStarted] = useState(false); //Inicia o resetea cronometro
   const [lapseList, setLapseList] = useState([]); // Guarda lapsos
+
 
   useEffect(() => {
     if (isStarted && !isPaused) {
@@ -25,10 +30,12 @@ const Clock = () => {
     }
   }, [isStarted, isPaused]);
 
+
   const handleStartPause = () => {
     setIsPaused(!isPaused);
     setIsStarted(true);
   };
+
 
   const handleReset = () => {
     setIsPaused(true);
@@ -37,22 +44,34 @@ const Clock = () => {
     setLapseList([]);
   };
 
+
   const handleLapse = () => {
     setLapseList([...lapseList, formatTime(reloj)]);
+    guardarTiempo([...lapseList, formatTime(reloj)]);
   };
+
+  const handleObtenerTiempos = async () => {
+    const tiempos = await obtenerTiempos();
+    if (tiempos.length != 0) {
+      console.log('Tiempos obtenidos:', tiempos);
+    }
+  };
+
+  const handleEliminarTiempos = async () => {
+    await eliminarTiempos();
+  };
+
+
 
   const formatTime = (time) => {
     //Formatea lo cronometrado para que salga en formato 00:00.00
-    const minutes = Math.floor(time / 60)
-      .toString()
-      .padStart(2, "0");
-    const seconds = Math.floor(time % 60)
-      .toString()
-      .padStart(2, "0");
-    const milliseconds = Math.floor((time % 1) * 100)
-      .toString()
-      .padStart(2, "0");
+    const minutes = Math.floor(time / 60).toString().padStart(2, "0");
+
+    const seconds = Math.floor(time % 60).toString().padStart(2, "0");
+
+    const milliseconds = Math.floor((time % 1) * 100).toString().padStart(2, "0");
     return `${minutes}:${seconds}.${milliseconds}`;
+
   };
 
   return (
@@ -69,7 +88,14 @@ const Clock = () => {
       </View>
       <LapseContainer lapseList={lapseList} />
       <StatusBar style="auto" />
+
+      <View style={styles.buttonList}>
+        <ClockButton onPress={handleObtenerTiempos} text={<FaAlignJustify />} />
+        <ClockButton onPress={handleEliminarTiempos} text={<FaRegTrashAlt />} />
+      </View>
+
     </View>
+
   );
 };
 
