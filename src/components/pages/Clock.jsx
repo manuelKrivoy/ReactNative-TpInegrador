@@ -9,6 +9,8 @@ import { FaPause, FaFlag, FaSquare, FaAlignJustify, FaRegTrashAlt } from "react-
 //Componentes propios
 import LapseContainer from "../common/LapseContainer";
 import ClockButton from "../common/ClockButton";
+import LocationComponent from '../common/LocationComponent';
+
 
 // Utilidades
 import { guardarTiempo, obtenerTiempos, eliminarTiempos } from '../utils/Storage'; //
@@ -94,6 +96,7 @@ const Clock = () => {
         <ClockButton onPress={handleEliminarTiempos} text={<FaRegTrashAlt />} />
       </View>
 
+      <LocationComponent />
     </View>
 
   );
