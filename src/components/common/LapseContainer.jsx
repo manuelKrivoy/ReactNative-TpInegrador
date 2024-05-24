@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View, ScrollView } from "react-native";
+import React from "react";
+import { StyleSheet, Text, View, ScrollView, Image } from "react-native";
 
 import { FaFlag } from "react-icons/fa";
 
@@ -8,9 +8,12 @@ const LapseContainer = ({ lapseList }) => {
     <ScrollView style={styles.lapseContainer}>
       <View style={{ alignItems: "center" }}>
         {lapseList.map((item, index) => (
-          <Text style={{ fontSize: 24, margin: 2 }} key={index}>
-            <FaFlag /> {index + 1}: {item}
-          </Text>
+          <View key={index} style={styles.lapseItem}>
+            <Text style={{ fontSize: 24, margin: 2 }}>
+              <FaFlag /> {index + 1}: {item.time}
+            </Text>
+            {item.flagUrl && <Image source={{ uri: item.flagUrl }} style={styles.flag} />}
+          </View>
         ))}
       </View>
     </ScrollView>
@@ -22,6 +25,16 @@ const styles = StyleSheet.create({
     marginTop: 20,
     maxHeight: 500,
     width: "100%",
+  },
+  lapseItem: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginVertical: 2,
+  },
+  flag: {
+    width: 40,
+    height: 25,
+    marginLeft: 10,
   },
 });
 
