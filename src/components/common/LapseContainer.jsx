@@ -23,8 +23,8 @@ const LapseContainer = ({ lapseList }) => {
 const styles = StyleSheet.create({
   lapseContainer: {
     marginTop: 20,
-    maxHeight: 500,
-    width: "100%",
+    maxHeight: 100,
+    width: "50%",
   },
   lapseItem: {
     flexDirection: "row",

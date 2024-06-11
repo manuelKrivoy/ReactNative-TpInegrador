@@ -45,9 +45,9 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   flag: {
-    width: 220,
-    height: 140,
-    marginTop: 20,
+    width: 100,
+    height: 50,
+    marginTop: 10,
   },
   noFlagMessage: {
     fontSize: 18,
