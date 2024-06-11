@@ -17,6 +17,10 @@ import { guardarTiempo, obtenerTiempos, eliminarTiempos } from "../utils/Storage
 import { LocationContext } from "../context/LocationContext"; // Importar LocationContext
 import LocationComponent from "../common/LocationComponent";
 
+// DB
+import { collection, addDoc } from 'firebase/firestore';
+import { db } from '../../../firebase'; // Importa la instancia de Firestore
+
 const Clock = () => {
   const [reloj, setReloj] = useState(0.0); // Cronometra
   const [isPaused, setIsPaused] = useState(true); // Guarda estado botón pausa
@@ -33,6 +37,7 @@ const Clock = () => {
       return () => clearInterval(intervalo);
     }
   }, [isStarted, isPaused]);
+
 
   const handleStartPause = () => {
     setIsPaused(!isPaused);
@@ -51,6 +56,7 @@ const Clock = () => {
     const newLapseList = [...lapseList, newLapse];
     setLapseList(newLapseList); //Para lapseList
     guardarTiempo(newLapseList); // Almacenamiento interno
+    // guardarVueltaEnBD(newLapseList); --> DESCOMENTAR ESTO PARA GUARDAR VUELTA EN BD
   };
 
   const handleObtenerTiempos = async () => {
@@ -73,6 +79,17 @@ const Clock = () => {
       .toString()
       .padStart(2, "0");
     return `${minutes}:${seconds}.${milliseconds}`;
+  };
+
+
+  const guardarVueltaEnBD = async (newLapseList) => {
+    try {
+      // Agregar un nuevo documento a la colección 'vueltas' con los datos proporcionados
+      await addDoc(collection(db, 'vueltas'), { lapses: newLapseList});
+  
+    } catch (error) {
+      console.error("Error al guardar el tiempo", error);
+    }
   };
 
   return (
