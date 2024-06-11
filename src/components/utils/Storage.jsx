@@ -1,5 +1,6 @@
 // npm install @react-native-async-storage/async-storage
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { User } from "../context/UserContext";
 
 // Guardar la lista de tiempos y la URL de la bandera.
 export const guardarTiempo = async (tiempos, flagUrl) => {
@@ -20,10 +21,12 @@ export const obtenerTiempos = async () => {
   try {
     const tiemposFlagData = await AsyncStorage.getItem("tiemposFlagData");
     if (tiemposFlagData !== null) {
+      console.log(user);
       console.log(tiemposFlagData);
       return JSON.parse(tiemposFlagData);
     } else {
       console.log("No hay tiempos y flag URL almacenados");
+      console.log(user);
       return { tiempos: [], flagUrl: null };
     }
   } catch (error) {
