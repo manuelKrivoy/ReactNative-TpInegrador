@@ -18,15 +18,11 @@ export default function LoginScreen({ navigation }) {
       setUserEmail(email); // Guarda el email del usuario en el contexto
       navigation.replace("Home");
     } catch (error) {
-      if (error.statusCode = 400)
-      {
+      if ((error.statusCode = 400)) {
         setError("Credenciales inválidas");
-      }
-      else
-      {
+      } else {
         setError(error.message);
       }
-
     }
   };
 

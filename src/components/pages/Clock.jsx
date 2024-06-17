@@ -1,4 +1,3 @@
-import { StatusBar } from "expo-status-bar";
 import React, { useEffect, useState, useContext } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { TouchableOpacity } from "react-native-web";
@@ -16,12 +15,12 @@ import { guardarTiempo, obtenerTiempos, eliminarTiempos } from "../utils/Storage
 
 // Context Location
 import { LocationContext } from "../context/LocationContext";
-import LocationComponent from "../common/LocationComponent";
+
 // Context User
 import { useUser } from "../context/UserContext";
 
 // DB
-import { collection, addDoc, doc, getDocs, query, where, updateDoc, setDoc } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import { db } from "../../../firebase"; // Importa la instancia de Firestore
 
 const Clock = ({ navigation }) => {
@@ -129,7 +128,6 @@ const Clock = ({ navigation }) => {
           </>
         )}
       </View>
-      <LocationComponent />
       <View style={styles.buttonList}>
         <ClockButton onPress={handleGuardarEnBD} text="Guardar en DB" />
         <ClockButton onPress={handleObtenerTiempos} text={<FaAlignJustify />} />
