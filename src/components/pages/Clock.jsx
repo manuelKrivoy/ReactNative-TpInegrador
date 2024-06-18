@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { StyleSheet, Text, View, ScrollView } from "react-native";
 import { Pressable } from "react-native";
-import Icon from 'react-native-vector-icons/Ionicons'; // Importar íconos desde react-native-vector-icons
+import Icon from "react-native-vector-icons/Ionicons"; // Importar íconos desde react-native-vector-icons
 
 // Componentes propios
 import LapseContainer from "../common/LapseContainer";
@@ -58,7 +58,6 @@ const Clock = ({ navigation }) => {
     guardarTiempo(newLapseList); // Almacenamiento interno
   };
 
-
   const handleEliminarTiempos = async () => {
     await eliminarTiempos();
     setLapseList([]);
@@ -107,13 +106,19 @@ const Clock = ({ navigation }) => {
       <View style={styles.header}>
         <Text style={styles.welcome}>Bienvenido, {userEmail}</Text>
         <Pressable style={styles.logoutButton} onPress={handleLogout}>
-          <Text style={styles.buttonText}>Cerrar Sesión</Text>
+          <Text style={styles.buttonText}>
+            {" "}
+            <Icon name="log-out" size={24} />
+          </Text>
         </Pressable>
       </View>
       <Text style={styles.counter}>{formatTime(reloj)}</Text>
 
       <View style={styles.buttonList}>
-        <ClockButton onPress={handleStartPause} text={isPaused ? <Icon name="play" size={24} /> : <Icon name="pause" size={24} />} />
+        <ClockButton
+          onPress={handleStartPause}
+          text={isPaused ? <Icon name="play" size={24} /> : <Icon name="pause" size={24} />}
+        />
         {isStarted && (
           <>
             <ClockButton onPress={handleReset} text={<Icon name="square" size={24} />} />
@@ -179,7 +184,6 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
   buttonText: {
-    color: "white",
     fontSize: 18,
     fontWeight: "bold",
   },
