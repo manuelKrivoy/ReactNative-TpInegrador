@@ -1,6 +1,6 @@
 // src/components/pages/Login.js
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, TextInput, Pressable, StyleSheet } from "react-native";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../../firebase";
 import { useUser } from "../context/UserContext"; // Importa el hook de contexto
@@ -47,9 +47,9 @@ export default function LoginScreen({ navigation }) {
       />
       {error ? <Text style={styles.error}>{error}</Text> : null}
 
-      <TouchableOpacity style={styles.button} onPress={handleLogin}>
+      <Pressable style={styles.button} onPress={handleLogin}>
         <Text style={styles.buttonText}>Ingresar</Text>
-      </TouchableOpacity>
+      </Pressable>
     </View>
   );
 }

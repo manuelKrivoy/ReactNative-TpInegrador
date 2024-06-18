@@ -1,10 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { TouchableOpacity } from "react-native-web";
-
-// React-Icons para iconos
-import { IoPlay } from "react-icons/io5";
-import { FaPause, FaFlag, FaSquare, FaAlignJustify, FaRegTrashAlt } from "react-icons/fa";
+import { StyleSheet, Text, View, ScrollView } from "react-native";
+import { Pressable } from "react-native";
+import Icon from 'react-native-vector-icons/Ionicons'; // Importar íconos desde react-native-vector-icons
 
 // Componentes propios
 import LapseContainer from "../common/LapseContainer";
@@ -113,27 +110,29 @@ const Clock = ({ navigation }) => {
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.welcome}>Bienvenido, {userEmail}</Text>
-        <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
+        <Pressable style={styles.logoutButton} onPress={handleLogout}>
           <Text style={styles.buttonText}>Cerrar Sesión</Text>
-        </TouchableOpacity>
+        </Pressable>
       </View>
       <Text style={styles.counter}>{formatTime(reloj)}</Text>
 
       <View style={styles.buttonList}>
-        <ClockButton onPress={handleStartPause} text={isPaused ? <IoPlay /> : <FaPause />} />
+        <ClockButton onPress={handleStartPause} text={isPaused ? <Icon name="play" size={24} /> : <Icon name="pause" size={24} />} />
         {isStarted && (
           <>
-            <ClockButton onPress={handleReset} text={<FaSquare />} />
-            {!isPaused && <ClockButton onPress={handleLapse} text={<FaFlag />} />}
+            <ClockButton onPress={handleReset} text={<Icon name="square" size={24} />} />
+            {!isPaused && <ClockButton onPress={handleLapse} text={<Icon name="flag" size={24} />} />}
           </>
         )}
       </View>
       <View style={styles.buttonList}>
         <ClockButton onPress={handleGuardarEnBD} text="Guardar en DB" />
-        <ClockButton onPress={handleObtenerTiempos} text={<FaAlignJustify />} />
-        <ClockButton onPress={handleEliminarTiempos} text={<FaRegTrashAlt />} />
+        <ClockButton onPress={handleObtenerTiempos} text={<Icon name="list" size={24} />} />
+        <ClockButton onPress={handleEliminarTiempos} text={<Icon name="trash" size={24} />} />
       </View>
-      <LapseContainer lapseList={lapseList} />
+      <ScrollView>
+        <LapseContainer lapseList={lapseList} />
+      </ScrollView>
     </View>
   );
 };

@@ -1,11 +1,11 @@
 import React from "react";
-import { TouchableOpacity, Text, StyleSheet } from "react-native";
+import {Pressable, Text, StyleSheet } from "react-native";
 
 const ClockButton = ({ onPress, text, style }) => {
   return (
-    <TouchableOpacity onPress={onPress} style={[styles.button, style]}>
+    <Pressable onPress={onPress} style={[styles.button, style]}>
       <Text style={styles.buttonText}>{text}</Text>
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 
