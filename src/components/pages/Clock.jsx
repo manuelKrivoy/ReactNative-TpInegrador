@@ -58,10 +58,6 @@ const Clock = ({ navigation }) => {
     guardarTiempo(newLapseList); // Almacenamiento interno
   };
 
-  const handleObtenerTiempos = async () => {
-    const { tiempos } = await obtenerTiempos();
-    setLapseList(tiempos); // Establecer la lista de lapsos desde el almacenamiento
-  };
 
   const handleEliminarTiempos = async () => {
     await eliminarTiempos();
@@ -127,7 +123,6 @@ const Clock = ({ navigation }) => {
       </View>
       <View style={styles.buttonList}>
         <ClockButton onPress={handleGuardarEnBD} text="Guardar en DB" />
-        <ClockButton onPress={handleObtenerTiempos} text={<Icon name="list" size={24} />} />
         <ClockButton onPress={handleEliminarTiempos} text={<Icon name="trash" size={24} />} />
       </View>
       <ScrollView>
