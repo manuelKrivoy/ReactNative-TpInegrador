@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   counter: {
-    fontSize: 48,
+    fontSize: 80,
     marginBottom: 50,
     textAlign: "center",
   },
