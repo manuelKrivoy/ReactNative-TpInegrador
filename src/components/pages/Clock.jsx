@@ -8,7 +8,8 @@ import LapseContainer from "../common/LapseContainer";
 import ClockButton from "../common/ClockButton";
 
 // Utilidades
-import { guardarTiempo, obtenerTiempos, eliminarTiempos } from "../utils/Storage";
+import { guardarTiempo, eliminarTiempos } from "../utils/Storage";
+import { Alert } from "react-native";
 
 // Context Location
 import { LocationContext } from "../context/LocationContext";
@@ -87,6 +88,7 @@ const Clock = ({ navigation }) => {
         lapses: newLapseList, // Lista de lapsos
         timestamp: new Date().toISOString(), // Fecha y hora en que se guarda el documento
       });
+      Alert.alert("Tiempos guardados correctamente", " Puedes ir a la ventana lapses para verlos.", [{ text: "OK" }]);
     } catch (error) {
       console.error("Error al guardar el tiempo en la base de datos", error);
     }
@@ -104,7 +106,9 @@ const Clock = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.welcome}>Bienvenido, {userEmail}</Text>
+        <Text style={styles.welcome}>
+          Bienvenido, <Text style={{ fontWeight: "bold" }}>{userEmail}</Text>
+        </Text>
         <Pressable style={styles.logoutButton} onPress={handleLogout}>
           <Text style={styles.buttonText}>
             {" "}
@@ -139,7 +143,7 @@ const Clock = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#9C7B74",
+    backgroundColor: "#F5F5F5",
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
@@ -153,14 +157,15 @@ const styles = StyleSheet.create({
     marginBottom: 20, // Espacio debajo del header
   },
   welcome: {
-    fontSize: 20,
+    fontSize: 16,
   },
   logoutButton: {
     alignItems: "center",
     backgroundColor: "#BD2E2E",
-    paddingHorizontal: 16,
-    paddingVertical: 8,
+    paddingHorizontal: 12,
+    paddingVertical: 6,
     borderRadius: 20,
+    margin: 5,
   },
   buttonList: {
     flexDirection: "row",
